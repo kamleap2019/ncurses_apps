@@ -64,5 +64,5 @@ TODO: Congratulations on your first ncurses.js app that has a window.
 ## References
 * [ncurses - wikipedia](https://en.wikipedia.org/wiki/Ncurses)
 * [ncurses getting started - Linux Journal](https://www.linuxjournal.com/content/getting-started-ncurses)
-
+* [ncurse HOW TO - TLDP](http://www.tldp.org/HOWTO/NCURSES-Programming-HOWTO/)
 
