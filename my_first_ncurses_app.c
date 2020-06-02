@@ -11,7 +11,9 @@ int main(int argc, char **argv){
 
     initialize_ncurses();
 
-    print_line("Bismillah, Welcome Humands");
+    print_line("Bismillah, Welcome Humans");
+
+    getch();    //Wait for the user input so that ncurses mode stays on
 
     close_ncurses();
     return 0;
