@@ -39,30 +39,34 @@ int main(int argc, char **argv){
 }
 
 void initialize_ncurses() {
-    initscr();
-    cbreak();
-    noecho();
+    initscr();  /* initialize stdscr where all of ncurses drawing happens */
 
     clear();
     refresh();
 }
 
 void close_ncurses() {
+    getch();        /* wait for any user input for closing window */
     endwin();
     exit(0);
 }
 ```
 
-In the app we specify the to get ncurses from system library path by saying `include <ncurses>`
-
+In the app we specify to get ncurses from system library path by saying `include <ncurses>`
+`initscr()` is the core function that initializes the ncurses system in the current terminal and allocates memory for the present window called stdscr.
 4. compile the app using `gcc -Wall -lncurses app.c`
 5. run using `.app`
-Congratulations on your first ncurses.js app. But it does nothing
-
-TODO: Congratulations on your first ncurses.js app that has a window.
+6. Let add a print statement to this application. Create the below print function and call it from the main function after initscr(). This function uses ncurses function addstr() for adding a string to the window and the printing it out to terminal by calling refresh(). If you don't call refresh() nothing will be printed.
+```
+void print_line(char *str){
+    addstr(str);
+    refresh();
+}
+```
+Congratuations on your first ncurses app
 
 ## References
 * [ncurses - wikipedia](https://en.wikipedia.org/wiki/Ncurses)
-* [ncurses getting started - Linux Journal](https://www.linuxjournal.com/content/getting-started-ncurses)
 * [ncurse HOW TO - TLDP](http://www.tldp.org/HOWTO/NCURSES-Programming-HOWTO/)
+* [ncurses getting started - Linux Journal](https://www.linuxjournal.com/content/getting-started-ncurses)
 

@@ -13,8 +13,6 @@ int main(int argc, char **argv){
 
     print_line("Bismillah, Welcome Humans");
 
-    getch();    //Wait for the user input so that ncurses mode stays on
-
     close_ncurses();
     return 0;
 }
@@ -29,6 +27,7 @@ void initialize_ncurses() {
 }
 
 void close_ncurses() {
+    getch();    /* Wait for the user input so that ncurses mode stays on */
     endwin();
     exit(0);
 }
