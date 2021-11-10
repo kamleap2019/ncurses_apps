@@ -1,37 +1,71 @@
-## Welcome to GitHub Pages
+# ncurses_apps
+textual UI based apps
 
-You can use the [editor on GitHub](https://github.com/kamleap2019/ncurses_apps/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+# Introduction
+This repo/folder contains basic textual UI (ncurses) based web apps. Refernce apps will be kept in separate branches here.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+## [ncurses](https://invisible-mirror.net/archives/ncurses/) Apps
+ncurses allows to write text based user interface.
 
-### Markdown
+## Creating a ncurses App
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+### What is needed for a ncurses app
+In its simplest form, nothing except ncurses library should be available on your system. I am using mac and it can be installed using HomeBrew like
+`brew install ncurses`
 
-```markdown
-Syntax highlighted code block
+### The first ncurses app (Welcome Humans)
+To keep it simple, all of the below stuff is done from a terminal (aka cli=command line interface).
 
-# Header 1
-## Header 2
-### Header 3
+1. Create a C source ```my_first_ncurses_app.c```
+2. Open the file using whatever editor you prefer ```vi app.js``` and paste the below code in that file. This code is based upon LJ article from [here](https://www.linuxjournal.com/content/getting-started-ncurses)
 
-- Bulleted
-- List
+```
+/* My first ncurses application */
 
-1. Numbered
-2. List
+#include <ncurses.h>
+#include <stdlib.h>
 
-**Bold** and _Italic_ and `Code` text
+void initialize_ncurses();
+void close_ncurses();
 
-[Link](url) and ![Image](src)
+int main(int argc, char **argv){
+
+    initialize_ncurses();
+
+
+
+    close_ncurses();
+    return 0;
+}
+
+void initialize_ncurses() {
+    initscr();  /* initialize stdscr where all of ncurses drawing happens */
+
+    clear();
+    refresh();
+}
+
+void close_ncurses() {
+    getch();        /* wait for any user input for closing window */
+    endwin();
+    exit(0);
+}
 ```
 
-For more details see [Basic writing and formatting syntax](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
+In the app we specify to get ncurses from system library path by saying `include <ncurses>`
+`initscr()` is the core function that initializes the ncurses system in the current terminal and allocates memory for the present window called stdscr.
+4. compile the app using `gcc -Wall -lncurses app.c`
+5. run using `.app`
+6. Let add a print statement to this application. Create the below print function and call it from the main function after initscr(). This function uses ncurses function addstr() for adding a string to the window and the printing it out to terminal by calling refresh(). If you don't call refresh() nothing will be printed.
+```
+void print_line(char *str){
+    addstr(str);
+    refresh();
+}
+```
+Congratuations on your first ncurses app
 
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/kamleap2019/ncurses_apps/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+## References
+* [ncurses - wikipedia](https://en.wikipedia.org/wiki/Ncurses)
+* [ncurse HOW TO - TLDP](http://www.tldp.org/HOWTO/NCURSES-Programming-HOWTO/)
+* [ncurses getting started - Linux Journal](https://www.linuxjournal.com/content/getting-started-ncurses)
